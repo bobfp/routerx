@@ -1,0 +1,16 @@
+{
+  "name": "routerx",
+  "version": "0.1.0",
+  "description": "A functional reactive router built for use with rxjs apps.",
+  "main": "routerx.js",
+  "scripts": {
+    "test": "mocha -R nyan --compilers js:babel/register"
+  },
+  "author": "bcoop713",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^5.8.19",
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  }
+}
