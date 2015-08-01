@@ -1,24 +1,6 @@
 import rx from 'rx'
 import {find, includes, keys, reduce} from 'lodash'
 
-/*
-context = {
-  name: 'users',
-  path: '/users/4',
-  params: {
-    id: '4'
-  }
-}
-
-routes = [
-  {name: 'login', path: '/'}
-  {name: 'home', path: '/home'},
-  {name: 'users', path: '/users/:id'}
-]
-
-route = [users, {id: '4'}]
-*/
-
 //path$ -> context$
 export function start(route$, routes) {
   return route$.map(route => {
