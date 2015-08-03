@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import jsdom from 'jsdom'
-import {start, contextify, parameterize} from '../routerx.js'
+import {makeDriver, contextify, parameterize} from '../routerx.js'
 import rx from 'rx'
 
 describe('routerx', () => {
@@ -19,7 +19,7 @@ describe('routerx', () => {
       {name: 'home', path: '/home'},
       {name: 'users', path: '/users/:id'}
     ]
-    start(route$, routes).subscribe(
+    makeDriver(routes)(route$).subscribe(
       context => {
         expect(context.path).to.equal(global.window.location.pathname)
       },
