@@ -5,21 +5,28 @@ import routerx from '../routerx'
 console.log(routerx)
 
 function routeHandler(DOM) {
-  return DOM.get('.test', 'click')
+  return Cycle.Rx.Observable.merge(
+    DOM.get('.home', 'click')
     .map(event => {
-      return ['users', {id: 4}]
+      return ['home', {}]
+    }),
+    DOM.get('.users', 'click')
+    .map(event => {
+      return ['users', {
+        id: '4'
+      }]
     })
-    .startWith(['home', {}])
+  ).startWith(['home', {}])
 }
 
 function view(router) {
   return router
     .map(route => {
       console.log('NAV TO', route)
-      if (route.name === 'home') {
-        return h('button.test', 'users')
+      if (route.name === 'users') {
+        return h('button.home', 'home')
       } else {
-        return h('button.test', 'home')
+        return h('button.users', 'user 4')
       }
     })
 }

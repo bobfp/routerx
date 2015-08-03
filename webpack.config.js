@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './app.js',
+  entry: './example/app.js',
   output: {
-    path: __dirname,
+    path: './example/',
     filename: 'bundle.js'
   },
   module: {
@@ -10,5 +10,12 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel-loader'
     }]
+  },
+  devServer: {
+    contentBase: './example',
+    progress: true,
+    colors: true,
+    inline: true,
+    historyApiFallback: true
   }
 };
