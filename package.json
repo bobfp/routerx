@@ -1,11 +1,12 @@
 {
   "name": "routerx",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A functional reactive router built for use with rxjs apps.",
   "main": "index.js",
   "scripts": {
     "test": "mocha -w -R spec --compilers js:babel/register"
   },
+  "keywords": ["frp", "rx", "cycle", "router"],
   "author": "bcoop713",
   "license": "MIT",
   "devDependencies": {
