@@ -16,7 +16,7 @@ function routeHandler(DOM) {
         id: '4'
       }]
     })
-  ).startWith(['home', {}])
+  )
 }
 
 function view(router) {

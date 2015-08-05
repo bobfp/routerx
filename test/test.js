@@ -1,12 +1,17 @@
 import {expect} from 'chai'
 import jsdom from 'jsdom'
-import {makeDriver, contextify, parameterize} from '../routerx.js'
 import rx from 'rx'
+import routerx from '../routerx.js'
+import {contextify
+       , parameterize
+       , initialContext
+       , pathContext
+       } from '../routerx.js'
 
 describe('routerx', () => {
   it('should navigate to provided routes', (done) => {
     global.window = jsdom.jsdom().defaultView
-    global.window.location.href = 'http://routerx.com/start-path'
+    global.window.location.href = 'http://routerx.com/users/5'
 
     const route$ = rx.Observable.fromArray([
       ['login', {}],
@@ -19,8 +24,9 @@ describe('routerx', () => {
       {name: 'home', path: '/home'},
       {name: 'users', path: '/users/:id'}
     ]
-    makeDriver(routes)(route$).subscribe(
+    routerx(routes)(route$).subscribe(
       context => {
+        console.log('test.js', context)
         expect(context.path).to.equal(global.window.location.pathname)
       },
       error => {
@@ -57,11 +63,24 @@ describe('contextify', () => {
   })
 })
 
-describe('parameterize', () => {
-  it('should place parameters into path', () => {
-    const path = '/users/:id/:color'
-    const params = {id: 4, color: 'blue'}
+describe('pathContext', () => {
+  it('should return the context of a path', () => {
+    const path = '/users/4/blue'
+    const routes = [
+      {name: 'login', path: '/'},
+      {name: 'home', path: '/home'},
+      {name: 'users', path: '/users/:id'},
+      {name: 'complex', path: '/users/:id/:color'}
+    ]
+    const expectedContext = {
+      name: 'complex',
+      path: '/users/4/blue',
+      params: {
+        id: '4',
+        color: 'blue'
+      }
+    }
 
-    expect(parameterize(path, params)).to.equal('/users/4/blue')
+    expect(pathContext(path, routes)).to.deep.equal(expectedContext);
   })
 })
