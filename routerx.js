@@ -1,11 +1,11 @@
-import rx from 'rx'
+import Rx from 'rx'
 import p2r from 'path-to-regexp'
 import {zipObject, map, find, includes, keys, reduce} from 'lodash'
 
 //routes -> route$ -> context$
 export default function makeDriver(routes) {
   return function(route$) {
-    const popStateSubject = rx.Observable.create(observer => {
+    const popStateSubject = Rx.Observable.create(observer => {
       window.onpopstate = function popstateCallback() {
         observer.onNext(pathContext(window.location.pathname, routes))
       }

@@ -4,13 +4,13 @@ import routerx from '../routerx'
 
 console.log(routerx)
 
-function routeHandler(DOM) {
+function routeStream(DOM) {
   return Cycle.Rx.Observable.merge(
     DOM.get('.home', 'click')
     .map(event => {
       return ['home', {}]
     }),
-    DOM.get('.users', 'click')
+    DOM.get('.hello', 'click')
     .map(event => {
       return ['hello', {
         name: 'George'
@@ -19,7 +19,7 @@ function routeHandler(DOM) {
   )
 }
 
-function view(router) {
+function routeHandler(router) {
   return router
     .map(route => {
       console.log('NAV TO', route)
@@ -28,7 +28,7 @@ function view(router) {
           return h('button.home', 'home')
           break
         case 'home':
-          return h('button.users', 'Say Hi')
+          return h('button.hello', 'Say Hi')
           break
         case 'hello':
           return h('h1', 'Hello ' + route.params.name)
@@ -42,14 +42,13 @@ function view(router) {
 
 function main({DOM, router}) {
   return {
-    DOM: view(router),
-    router: routeHandler(DOM)
+    DOM: routeHandler(router),
+    router: routeStream(DOM)
   };
 };
 
 const routes = [
-  {name: 'login', path: '/'},
-  {name: 'home', path: '/home'},
+  {name: 'home', path: '/'},
   {name: 'users', path: '/users/:id'},
   {name: 'hello', path: '/hello/:name?'},
   {name: 'notFound', path: '*'},
