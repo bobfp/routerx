@@ -12,8 +12,8 @@ function routeHandler(DOM) {
     }),
     DOM.get('.users', 'click')
     .map(event => {
-      return ['users', {
-        id: '4'
+      return ['hello', {
+        name: 'George'
       }]
     })
   )
@@ -23,10 +23,19 @@ function view(router) {
   return router
     .map(route => {
       console.log('NAV TO', route)
-      if (route.name === 'users') {
-        return h('button.home', 'home')
-      } else {
-        return h('button.users', 'user 4')
+      switch (route.name) {
+        case 'users':
+          return h('button.home', 'home')
+          break
+        case 'home':
+          return h('button.users', 'Say Hi')
+          break
+        case 'hello':
+          return h('h1', 'Hello ' + route.params.name)
+          break
+        case 'notFound':
+          return h('h1', 'Page Not Found')
+          break
       }
     })
 }
@@ -41,7 +50,9 @@ function main({DOM, router}) {
 const routes = [
   {name: 'login', path: '/'},
   {name: 'home', path: '/home'},
-  {name: 'users', path: '/users/:id'}
+  {name: 'users', path: '/users/:id'},
+  {name: 'hello', path: '/hello/:name?'},
+  {name: 'notFound', path: '*'},
 ]
 
 Cycle.run(main, {

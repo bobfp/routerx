@@ -5,11 +5,16 @@ import {zipObject, map, find, includes, keys, reduce} from 'lodash'
 //routes -> route$ -> context$
 export default function makeDriver(routes) {
   return function(route$) {
+    const popStateSubject = new rx.Subject()
+    window.onpopstate = function popstateCallback() {
+      popStateSubject.onNext(pathContext(window.location.pathname, routes))
+    }
     return route$.map(route => {
       const context = contextify(route, routes)
-      window.history.pushState({}, 'title', context.path)
+      window.history.pushState(context, context.name, context.path)
       return context
     })
+    .merge(popStateSubject)
     .startWith(pathContext(window.location.pathname, routes))
   }
 }
