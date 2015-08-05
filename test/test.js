@@ -9,7 +9,7 @@ import {contextify
        } from '../routerx.js'
 
 describe('routerx', () => {
-  it('should navigate to provided routes', (done) => {
+  it('should navigate to provided routes', () => {
     global.window = jsdom.jsdom().defaultView
     global.window.location.href = 'http://routerx.com/users/5'
 
@@ -24,18 +24,16 @@ describe('routerx', () => {
       {name: 'home', path: '/home'},
       {name: 'users', path: '/users/:id'}
     ]
-    routerx(routes)(route$).subscribe(
+    const sub = routerx(routes)(route$).subscribe(
       context => {
         console.log('test.js', context)
         expect(context.path).to.equal(global.window.location.pathname)
       },
       error => {
         console.log(error);
-        done();
       },
       () => {
         console.log('complete')
-        done();
       }
     )
   })
