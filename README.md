@@ -1,5 +1,5 @@
 # RouterX
-A stupid simple functional reactive router built for use with Rx.js apps. Simple supply the router with a stream of route changes, and the router will return a stream of context objects discribing the current route. Hashbang mode and other config options coming soon.
+A stupid simple functional reactive router built for use with Rx.js apps. Simply supply the router with a stream of route changes, and the router will return a stream of context objects discribing the current route. Hashbang mode and other config options coming soon.
 
 ## Install
     npm install routerx
