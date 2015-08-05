@@ -18,11 +18,11 @@ const routes = [
 ```
 
 
-#### The routerx function takes an array of routes and returns a function.
+The routerx function takes an array of routes and returns a function.
 
     routerx(routes)
 
-#### The returned function takes an observable of route objects and returns an observable of context objects
+The returned function takes an observable of route objects and returns an observable of context objects
 
     const parameters = {
         id: '4',
