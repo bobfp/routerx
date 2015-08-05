@@ -41,6 +41,13 @@ The returned function takes an observable of route objects and returns an observ
 
 
 ## Simple Useless Example
+    const routes = [
+      {name: 'home', path: '/'},
+      {name: 'users', path: '/users/:id'},
+      {name: 'hello', path: '/hello/:name?'},
+      {name: 'notFound', path: '*'},
+    ]
+    
     const route$ = rx.Observable.fromArray([
       ['login', {}],
       ['home', {}],
