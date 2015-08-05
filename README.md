@@ -1,5 +1,5 @@
 # RouterX
-A stupid simple functional reactive router built for use with Rx.js apps.
+A stupid simple functional reactive router built for use with Rx.js apps. Hashbang mode and other config options coming soon.
 
 ## Install
     npm install routerx
